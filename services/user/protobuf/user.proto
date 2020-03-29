@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package protobuf;
+
+import "google/api/annotations.proto";
+
+service UserService {
+
+    rpc SignUp (SignUpRequest) returns (SignUpResponse) {
+        option (google.api.http) = {
+      post: "/api/v1/user/signup"
+
+    };
+    }
+
+    rpc SignIn (SignInRequest) returns (SignInResponse) {
+        option (google.api.http) = {
+      post: "/api/v1/user/signin"
+    };
+    }
+
+    rpc LogOut (LogOutRequest) returns (LogOutResponse) {
+        option (google.api.http) = {
+      get: "/api/v1/user/logout"
+    };
+    }
+
+    rpc Create (CreateUserRequest) returns (CreateUserResponse) {}
+    rpc Update (UpdateUserRequest) returns (UpdateUserResponse) {}
+    rpc Delete (DeleteUserRequest) returns (DeleteUserResponse) {}
+    rpc Get (GetUserRequest) returns (GetUserResponse) {}
+    rpc Find (FindUserRequest) returns (FindUserResponse) {}
+
+}
+
+message SignUpRequest {
+    string Username = 1;
+    string Password = 2;
+    string FirstName = 3;
+    string LastName = 4;
+}
+
+message SignUpResponse {
+    string Slug = 1;
+    string Username = 2;
+    string Role = 3;
+}
+
+message SignInRequest {
+    string Username = 1;
+    string Password = 2;
+}
+
+message SignInResponse {
+    string Slug = 1;
+    string Username = 2;
+    string Role = 3;
+}
+
+message LogOutRequest {
+    string Token = 1;
+}
+
+message LogOutResponse {
+    int32 Status = 1;
+}
+
+message CreateUserRequest {
+    string Username = 1;
+    string Email = 2;
+    string Password = 3;
+    string Phone = 4;
+    string FirstName = 5;
+    string LastName = 6;
+}
+
+message CreateUserResponse {
+    User User = 1;
+}
+
+message UpdateUserRequest {
+    string Slug = 1;
+    string Email = 2;
+    string Password = 3;
+    string Phone = 4;
+    string FirstName = 5;
+    string LastName = 6;
+}
+
+message UpdateUserResponse {
+    int32 Status =1;
+}
+
+message DeleteUserRequest {
+    string Slug = 1;
+}
+
+message DeleteUserResponse {
+    int32 Status =1;
+}
+
+message GetUserRequest {
+    string Slug = 1;
+}
+
+message GetUserResponse {
+    User User = 1;
+}
+
+message FindUserRequest {
+    string Slug = 1;
+}
+
+message FindUserResponse {
+    repeated User Users = 1;
+}
+
+message User {
+    string Username = 1;
+    string Slug = 2;
+    string Email = 3;
+    string Password = 4;
+    string FirstName = 5;
+    string LastName = 6;
+    string Phone = 7;
+}
